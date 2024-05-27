@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const Recipe = require("./models/recipe");
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -12,27 +13,6 @@ const CONNECTION_URL = process.env.CONNECTION_URL;
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to the database'))
   .catch((error) => console.error('Error connecting to the database', error));
-
-const recipeSchema = new mongoose.Schema({
-  title: String,
-  ingredients: [String],
-  instructions: String,
-  cookingTime: Number
-});
-
-const Recipe = mongoose.model('Recipe', recipeSchema);
-
-// Sample data
-const sampleRecipes = [
-  { title: 'Spaghetti Carbonara', ingredients: ['Spaghetti', 'Eggs', 'Pancetta', 'Parmesan cheese', 'Black pepper'], instructions: 'Boil spaghetti. Fry pancetta. Mix with eggs and cheese. Combine.', cookingTime: 20 },
-  { title: 'Chicken Curry', ingredients: ['Chicken', 'Onions', 'Tomatoes', 'Garlic', 'Ginger', 'Spices'], instructions: 'Cook chicken. Add onions, tomatoes, garlic, ginger, and spices. Simmer.', cookingTime: 40 }
-];
-
-// Adding sample recipes to the collection
-sampleRecipes.forEach(async (recipe) => {
-  const newRecipe = new Recipe(recipe);
-  await newRecipe.save();
-});
 
 // CRUD Operations
 // Get all recipes
