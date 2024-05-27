@@ -33,33 +33,45 @@ app.get('/api/recipes/:title', async (req, res) => {
 
 // Create a new recipe
 app.post('/api/recipes', async (req, res) => {
-  const existingRecipe = await Recipe.findOne({ title: req.body.title });
-  if (existingRecipe) {
-    res.status(409).json({ message: 'Recipe already exists' });
-  } else {
-    const newRecipe = new Recipe(req.body);
-    await newRecipe.save();
-    res.status(201).json(newRecipe);
+  try {
+    const existingRecipe = await Recipe.findOne({ title: req.body.title });
+    if (existingRecipe) {
+      res.status(409).json({ message: 'Recipe already exists' });
+    } else {
+      const newRecipe = new Recipe(req.body);
+      await newRecipe.save();
+      res.status(201).json(newRecipe);
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 
 // Update a recipe by ID
 app.put('/api/recipes/:id', async (req, res) => {
-  const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  if (updatedRecipe) {
-    res.json(updatedRecipe);
-  } else {
-    res.status(404).json({ message: 'Recipe not found' });
+  try {
+    const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (updatedRecipe) {
+      res.json(updatedRecipe);
+    } else {
+      res.status(404).json({ message: 'Recipe not found' });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 
 // Delete a recipe by ID
 app.delete('/api/recipes/:id', async (req, res) => {
-  const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id);
-  if (deletedRecipe) {
-    res.json({ message: 'Recipe deleted successfully' });
-  } else {
-    res.status(404).json({ message: 'Recipe not found' });
+  try {
+    const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id);
+    if (deletedRecipe) {
+      res.json({ message: 'Recipe deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Recipe not found' });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 
