@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Recipe App</h1>
+  </header>
+
+  <main>
+    <div>
+      <h2>All Recipes</h2>
+      <table id="recipesTable" border="1">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Ingredients</th>
+            <th>Instructions</th>
+            <th>Cooking Time</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Recipes will be populated here -->
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2>Add a New Recipe</h2>
+      <form id="addRecipeForm">
+        <input type="text" id="title" placeholder="Title" required><br>
+        <textarea id="ingredients" placeholder="Ingredients (comma separated)" required></textarea><br>
+        <textarea id="instructions" placeholder="Instructions" required></textarea><br>
+        <input type="number" id="cookingTime" placeholder="Cooking Time (in minutes)" required><br>
+        <button type="submit" class="add">Add Recipe</button>
+      </form>
+    </div>
+    <div id="editRecipeSection" style="display:none;">
+      <h2>Edit Recipe</h2>
+      <form id="editRecipeForm">
+        <input type="text" id="editTitle" placeholder="Title" required><br>
+        <textarea id="editIngredients" placeholder="Ingredients (comma separated)" required></textarea><br>
+        <textarea id="editInstructions" placeholder="Instructions" required></textarea><br>
+        <input type="number" id="editCookingTime" placeholder="Cooking Time (in minutes)" required><br>
+        <button type="submit" class="update">Update Recipe</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 Recipe App</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

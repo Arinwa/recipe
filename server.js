@@ -3,9 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Recipe = require("./models/recipe");
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;

@@ -1,0 +1,94 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header,
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+footer {
+  position: flex;
+  bottom: 0;
+  width: 100%;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  margin-top: 60px;
+  /* height of the header */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ccc;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+form {
+  margin: 20px 0;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 5px 0;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button.add {
+  background-color: #4CAF50;
+  /* Green */
+  color: white;
+}
+
+button.update {
+  background-color: #008CBA;
+  /* Blue */
+  color: white;
+}
+
+button.delete {
+  background-color: #f44336;
+  /* Red */
+  color: white;
+}
