@@ -16,6 +16,11 @@
   <main>
     <div>
       <h2>All Recipes</h2>
+      <form id="searchForm">
+        <input type="text" id="searchTitle" placeholder="Search by title" required>
+        <button type="submit">Search</button>
+      </form>
+      <button id="backButton" style="display:none;">Back</button>
       <table id="recipesTable" border="1">
         <thead>
           <tr>
@@ -52,11 +57,9 @@
       </form>
     </div>
   </main>
-
   <footer>
-    <p>© 2024 Recipe App</p>
+    <p>&copy; 2024 Recipe App</p>
   </footer>
-
   <script src="script.js"></script>
 </body>
 

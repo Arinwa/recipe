@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const addRecipeForm = document.getElementById('addRecipeForm');
   const editRecipeForm = document.getElementById('editRecipeForm');
   const editRecipeSection = document.getElementById('editRecipeSection');
+  const searchForm = document.getElementById('searchForm');
+  const backButton = document.getElementById('backButton');
 
   async function fetchRecipes() {
     const response = await fetch('/api/recipes');
@@ -22,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
       `;
       tableBody.appendChild(row);
     });
+    backButton.style.display = 'none';
   }
 
   async function addRecipe(event) {
@@ -98,9 +101,37 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('editTitle').focus();
   }
 
+  async function searchRecipe(event) {
+    event.preventDefault();
+    const title = document.getElementById('searchTitle').value;
+    const response = await fetch(`/api/recipes/${title}`);
+
+    if (response.status === 200) {
+      const recipe = await response.json();
+      const tableBody = document.querySelector('#recipesTable tbody');
+      tableBody.innerHTML = `
+        <tr>
+          <td>${recipe.title}</td>
+          <td>${recipe.ingredients.join(', ')}</td>
+          <td>${recipe.instructions}</td>
+          <td>${recipe.cookingTime}</td>
+          <td>
+            <button class="update" onclick="editRecipe('${recipe._id}', '${recipe.title}', '${recipe.ingredients.join(', ')}', '${recipe.instructions}', ${recipe.cookingTime})">Update</button>
+            <button class="delete" onclick="deleteRecipe('${recipe._id}')">Delete</button>
+          </td>
+        </tr>
+      `;
+      backButton.style.display = 'block';
+    } else {
+      alert('Recipe not found');
+    }
+  }
+
+  backButton.addEventListener('click', fetchRecipes);
   window.editRecipe = editRecipe;
   window.deleteRecipe = deleteRecipe;
 
   addRecipeForm.addEventListener('submit', addRecipe);
+  searchForm.addEventListener('submit', searchRecipe);
   fetchRecipes();
 });

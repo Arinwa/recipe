@@ -22,7 +22,7 @@ header {
 }
 
 footer {
-  position: flex;
+  position: relative;
   bottom: 0;
   width: 100%;
 }
@@ -90,5 +90,11 @@ button.update {
 button.delete {
   background-color: #f44336;
   /* Red */
+  color: white;
+}
+
+button#backButton {
+  background-color: #FFA500;
+  /* Orange */
   color: white;
 }
